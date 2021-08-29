@@ -22,3 +22,5 @@ DCW (Downside EN)	http://192.168.2.183/control?var=dcw&val=1				val: 0 / 1
 Color Bar:			http://192.168.2.183/control?var=colorbar&val=0			val: 0 / 1
 Face Detection:		http://192.168.2.183/control?var=face_detect&val=0		val: 0 / 1
 Face Recognition:	http://192.168.2.183/control?var=face_recognize&val=0	val: 0 / 1
+
+Flashlight:			http://192.168.2.183/control?var=flash_enabled&val=1	val: 0 / 1
