@@ -11,9 +11,9 @@ I have also added a webhook for the flashlight.
 - Improved performance
 - Doesn't get burning hot
 - Control the LED with a webhook
-- Wifi-Autoreconnect
-- Static IP
-- The red LED is flashing whilst starting or whilst lost WiFi signal.
+- WiFi automatically reconnects if connection is lost
+- Set a static IP
+- The red LED is flashing whilst starting or if WiFi is disconnected
 
 ## Removed
 - Face recognition
