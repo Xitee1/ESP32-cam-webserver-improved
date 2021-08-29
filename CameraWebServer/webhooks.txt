@@ -1,0 +1,24 @@
+Resolution: 		http://192.168.2.183/control?var=framesize&val=9		val: 0 - 10
+Quality:	 		http://192.168.2.183/control?var=quality&val=10			val: 10 - 63
+Brightness:			http://192.168.2.183/control?var=brightness&val=0		val: -2 - 2
+Contrast:			http://192.168.2.183/control?var=contrast&val=1			val: -2 - 2
+Saturation: 		http://192.168.2.183/control?var=saturation&val=-1		val: -2 - 2
+Special Effect:		http://192.168.2.183/control?var=special_effect&val=0	val: 0 - 6
+AWB:				http://192.168.2.183/control?var=awb&val=1				val: 0 / 1
+AWB Gain:			http://192.168.2.183/control?var=awb_gain&val=1			val: 0 / 1
+WB Mode:			http://192.168.2.183/control?var=wb_mode&val=0			val: 0 - 4
+AEC SENSOR:			http://192.168.2.183/control?var=aec&val=1				val: 0 / 1
+AEC DSP:			http://192.168.2.183/control?var=aec2&val=0				val: 0 / 1
+AE Level:			http://192.168.2.183/control?var=ae_level&val=0			val: -2 - 2
+AGC:				http://192.168.2.183/control?var=agc&val=1				val: 0 / 1
+Gain Ceiling:		http://192.168.2.183/control?var=gainceiling&val=0		val: 0 - 6	(2x - 128x)
+BPC:				http://192.168.2.183/control?var=bpc&val=0				val: 0 / 1
+WPC:				http://192.168.2.183/control?var=wpc&val=1				val: 0 / 1
+Raw GMA:			http://192.168.2.183/control?var=raw_gma&val=1			val: 0 / 1
+Lens Correction:	http://192.168.2.183/control?var=lenc&val=1				val: 0 / 1
+H-Mirror:			http://192.168.2.183/control?var=hmirror&val=0			val: 0 / 1
+V-Flip:				http://192.168.2.183/control?var=vflip&val=0			val: 0 / 1
+DCW (Downside EN)	http://192.168.2.183/control?var=dcw&val=1				val: 0 / 1
+Color Bar:			http://192.168.2.183/control?var=colorbar&val=0			val: 0 / 1
+Face Detection:		http://192.168.2.183/control?var=face_detect&val=0		val: 0 / 1
+Face Recognition:	http://192.168.2.183/control?var=face_recognize&val=0	val: 0 / 1
