@@ -1,6 +1,8 @@
 #include "esp_camera.h"
 #include <WiFi.h>
-
+#include <ESPmDNS.h>
+#include <WiFiUdp.h>
+#include <ArduinoOTA.h>
 //
 // WARNING!!! PSRAM IC required for UXGA resolution and high JPEG quality
 //            Ensure ESP32 Wrover Module or other board with PSRAM is selected
@@ -19,15 +21,16 @@
 
 #include "camera_pins.h"
 
-const char* ssid = "Wlan-HRM";
+const char* ssid = "WLAN-HRM";
 const char* password = "KaltesFeuer";
 
 void startCameraServer();
+void stopWebserver();
 
 // Static IP
-IPAddress local_IP(192, 168, 2, 182);
+IPAddress local_IP(192, 168, 2, 31);
 IPAddress gateway(192, 168, 2, 1);
-IPAddress subnet(255, 255, 0, 0);
+IPAddress subnet(255, 255, 255, 0);
 
 void setup() {
   // LEDs
@@ -52,7 +55,7 @@ void setup() {
   WiFi.mode(WIFI_STA);
   Serial.print("Connecting to WiFi.");
   WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
+  while(WiFi.status() != WL_CONNECTED) {
     digitalWrite(33, HIGH);
     delay(250);
     Serial.print(".");
@@ -61,6 +64,39 @@ void setup() {
   }
   Serial.println("");
   Serial.println("WiFi connected");
+
+  // Register OTA
+  ArduinoOTA
+    .onStart([]() {
+      // Stop Webserver
+      stopWebserver();
+      
+      String type;
+      if (ArduinoOTA.getCommand() == U_FLASH)
+        type = "sketch";
+      else // U_SPIFFS
+        type = "filesystem";
+
+      // NOTE: if updating SPIFFS this would be the place to unmount SPIFFS using SPIFFS.end()
+      Serial.println("Start updating " + type);
+    })
+    .onEnd([]() {
+      Serial.println("\nEnd");
+    })
+    .onProgress([](unsigned int progress, unsigned int total) {
+      Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
+    })
+    .onError([](ota_error_t error) {
+      Serial.printf("Error[%u]: ", error);
+      if (error == OTA_AUTH_ERROR) Serial.println("Auth Failed");
+      else if (error == OTA_BEGIN_ERROR) Serial.println("Begin Failed");
+      else if (error == OTA_CONNECT_ERROR) Serial.println("Connect Failed");
+      else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
+      else if (error == OTA_END_ERROR) Serial.println("End Failed");
+    });
+
+  ArduinoOTA.begin();
+
 
   // Start the Server
   startCameraServer();
@@ -81,9 +117,12 @@ void setup() {
   delay(50);
   digitalWrite(33, HIGH); // off
 }
+
 void loop() {
+  // OTA Updater
+  ArduinoOTA.handle();
+
   // Autoreconnect WiFi
-  delay(1000*10);
   if(WiFi.status() != WL_CONNECTED) {
     Serial.print("Lost WiFi connection. Reconnecting");
     WiFi.disconnect();
@@ -99,6 +138,8 @@ void loop() {
     Serial.println("WiFi connected!");
   }
 }
+
+
 void configInitCamera(){
   camera_config_t config;
   
