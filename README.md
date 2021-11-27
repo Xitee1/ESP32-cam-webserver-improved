@@ -9,6 +9,7 @@ I have also added a webhook for the flashlight.
 
 ## Features
 - Improved performance
+- OTA Updates: Flash changes without disassembling your camera from its location 
 - Doesn't get burning hot
 - Control the LED with a webhook
 - WiFi automatically reconnects if connection is lost
